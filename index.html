@@ -25,7 +25,7 @@
 					<span class="rooms-font sm">Players</span>
 				</div>
 				<div class="row">
-					<button id="playerCount">4</button>
+					<button id="playerCount"></button>
 				</div>
 			</div>
 			<!-- Column 2 -->
@@ -34,18 +34,34 @@
 					<span class="rooms-font sm">Time</span>
 				</div>
 				<div class="row">
-					<button id="timeCount">45s</button>
+					<button id="timeCount">8 min</button>
 				</div>
 			</div>
 		</div>
 
 		<div class="container" id="players">
-			<div class="row"></div>
-			<div class="row"></div>
-			<div class="row"></div>
-			<div class="row"></div>
+			<div class="row"><input placeholder="Player 1"></input></div>
+			<div class="row"><input placeholder="Player 2"></input></div>
+			<div class="row hidden"><input placeholder="Player 3"></input></div>
+			<div class="row hidden"><input placeholder="Player 4"></input></div>
+			<div class="row hidden"><input placeholder="Player 5"></input></div>
+			<div class="row hidden"><input placeholder="Player 6"></input></div>
+		</div>
+
+		<div class="row"></div>
+			<!-- Column 1 -->
+			<div class="col">
+				<div class="row">
+					<button id="startButton">Start</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
+
+	<script src="script.js"></script>
+	<script>
+		app.startApp();
+	</script>
 
 </html>

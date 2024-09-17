@@ -3,11 +3,10 @@
 
 :root {
 	--palette-color-primary: #F9F9F9;
-	--palette-color-secondary: #dfdad5;
-	--palette-color-terciary: #FF6700;
-	--palette-color-highlight-light: #7755ee;
-	--palette-color-highlight: #443388;
-	--palette-color-highlight-dark: #151632;
+	--palette-color-secondary: #f0ecba;
+	--palette-color-terciary: #C1E2A4;
+	--palette-color-highlight-light: #86D293;
+	--palette-color-highlight: #534d91;
 }
 
 html,
@@ -17,7 +16,6 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: var(--palette-color-secondary);
-	background-color: red;
 	color: #222;
 	font-family: "Ubuntu", sans-serif;
 	font-weight: 300;
@@ -29,8 +27,8 @@ body {
 	font-weight: 400;
 	font-style: normal;
 	font-size: 3.5em;
-	background: -webkit-linear-gradient(var(--palette-color-terciary),
-			var(--palette-color-highlight-light));
+	background: -webkit-linear-gradient(var(--palette-color-secondary),
+			var(--palette-color-primary));
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -41,7 +39,6 @@ body {
 	background-clip: unset;
 	-webkit-background-clip: unset;
 	-webkit-text-fill-color: unset;
-	color: var(--palette-color-primary);
 	font-size: 1.5em;
 }
 
@@ -58,7 +55,7 @@ body {
 }
 
 header {
-	background-color: var(--palette-color-highlight-dark);
+	background-color: var(--palette-color-highlight);
 	color: #fff;
 	text-align: center;
 	padding: 1em 0;
@@ -72,16 +69,36 @@ header {
 .row {
 	width: 100%;
 	display: flex;
-	background-color: rebeccapurple;
 }
 
 .row span {
 	margin: 0 auto;
 	padding: 12px;
+	color: #333;
 }
 
 .row button {
 	margin: 0 auto;
+}
+
+.row input {
+	margin: 0 auto;
+	width: 75%;
+	display: inline-block;
+	padding: 15px 30px;
+	font-size: 1.6em;
+	text-align: center;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 800;
+	text-decoration: none;
+	border: none;
+	border-radius: 12px;
+	box-shadow: 0 0px 6px 2px rgba(0, 0, 0, 0.5);
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	outline: none;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: #222;
 }
 
 .col {
@@ -99,20 +116,24 @@ h1 {
 }
 
 button {
-	width: 75%;
+	width: 85%;
 	display: inline-block;
 	padding: 15px 30px;
-	font-size: 2.5em;
+	font-size: 2em;
 	text-align: center;
 	font-family: "Ubuntu", sans-serif;
+	font-weight: 800;
 	text-decoration: none;
 	background-color: var(--palette-color-highlight);
-	color: var(--palette-color-secondary);
+	color: var(--palette-color-primary);
 	border: none;
 	border-radius: 12px;
 	box-shadow: 0 0px 6px 2px rgba(0, 0, 0, 0.5);
 	transition: background-color 0.3s ease, border-color 0.3s ease;
 	margin: 4px 10px;
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 @media screen and (min-width: 480px) {
@@ -129,4 +150,25 @@ button {
 
 .button:hover {
 	background-color: var(--palette-color-highlight-light);
+}
+
+#players {
+	margin-top: 32px;
+}
+
+#startButton {
+	margin-top: 32px;
+	font-family: "Luckiest Guy", cursive;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 3.5em;
+}
+
+button:active {
+	transform: translateY(1px);
+	color: #ddd;
+}
+
+.hidden {
+	display: none;
 }
