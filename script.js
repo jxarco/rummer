@@ -163,7 +163,7 @@ var app = {
         this.lastTime = (this.lastTime == 0.0 ? now : this.lastTime);
         const dt = (now - this.lastTime) * 0.001;
 
-        this.currentPlayer.time = Math.max( this.currentPlayer.time - dt * 20, 0 );
+        this.currentPlayer.time = Math.max( this.currentPlayer.time - dt, 0 );
         const seconds = this.currentPlayer.time|0;
 
         if( seconds == 0 )
