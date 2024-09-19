@@ -16,6 +16,7 @@ class Player {
         this.id = id ?? -1;
         this.name = name ?? "";
         this.time = time ?? 0;
+        this.playing = true;
     }
 
 };
@@ -47,11 +48,13 @@ var app = {
         this.playerCountElement.innerText = this.playerCount;
 
         this.playerTimeElement = document.querySelector( "#playerTime" );
+        this.nextTurnLabelElement = document.querySelector( "#nextTurnLabel" );
+        this.nextTurnTimerElement = document.querySelector( "#nextTurnTimer" );
         this.startGameElement = document.querySelector( "#startButton" );
         this.pauseGameElement = document.querySelector( "#pauseButton" );
         this.finishGameElement = document.querySelector( "#finishButton" );
         this.restartGameElement = document.querySelector( "#restartButton" );
-        this.timerElement = document.querySelector( "#timer" );
+        this.timerElement = document.querySelector( "#mainTimer" );
 
         this.playerCountElement.addEventListener( 'mousedown', e => {
             const rect = this.playerCountElement.getBoundingClientRect();
@@ -120,25 +123,43 @@ var app = {
 
     startGame: function() {
 
-        this.shouldStop = false;
-        this.playersLeft = this.playerCount;
-        this.lastTime = 0;
-
-        // Set players
+        // Check repetitions
+        const names = Array.from(this.playerInputsElement.querySelectorAll( ".inputName" )).map( i => i.value )
         for( let i = 0; i < this.playerCount; ++i )
         {
-            const playerElement = this.playerInputsElement.children[ i ].querySelector( "input" );
-            const playerName = playerElement.value;
-
+            const playerName = names[ i ];
             if( playerName == "" )
             {
                 console.log(`Player ${ i + 1 } name is empty!`);
-                this.players.length = 0;
                 return;
             }
 
-            this.players.push( new Player( i, playerElement.value, this.playerTime * 60 ) )
+            if( playerName.length < 3 )
+            {
+                console.log(`Player ${ i + 1 } name [${ playerName }] is too short. Use 3 or more characters!`);
+                return;
+            }
+
+            const repeats = names.reduce( (acc, value) => { if( value == playerName ) return acc + 1; else return acc }, 0 );
+            if( repeats > 1 )
+            {
+                console.log(`Player name ${ playerName } is being used ${ repeats } times!`);
+                return;
+            }
         }
+
+        // Set players
+
+        this.players.length = 0;
+
+        for( let i = 0; i < this.playerCount; ++i )
+        {
+            this.players.push( new Player( i, names[ i ], this.playerTime * 60 ) )
+        }
+
+        this.shouldStop = false;
+        this.playersLeft = this.playerCount;
+        this.lastTime = 0;
 
         this.hide( this.preGameScreen );
         this.hide( this.postGameScreen );
@@ -214,6 +235,25 @@ var app = {
 
         this.currentPlayer = this.players[ id ];
         this.titleElement.innerText = this.currentPlayer.name;
+
+        const nextPlayer = this.getNextPlayer();
+        this.nextTurnLabelElement.innerHTML = "➡️" + nextPlayer.name;
+        this.nextTurnTimerElement.innerText = this.convertSeconds( nextPlayer.time|0 );
+    },
+
+    getNextPlayer: function() {
+
+        let id = this.currentPlayer.id;
+
+        while( true )
+        {
+            const newId = (id++ + 1) % this.playerCount;
+            const newPlayer = this.players[ newId ]
+            if( newPlayer.playing )
+            {
+                return newPlayer;
+            }
+        }
     },
 
     deletePlayer: function( id ) {

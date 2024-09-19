@@ -40,16 +40,15 @@
 		</div>
 
 		<div class="container" id="players">
-			<div class="row"><input placeholder="Player 1"></input></div>
-			<div class="row"><input placeholder="Player 2"></input></div>
-			<div class="row hidden"><input placeholder="Player 3"></input></div>
-			<div class="row hidden"><input placeholder="Player 4"></input></div>
-			<div class="row hidden"><input placeholder="Player 5"></input></div>
-			<div class="row hidden"><input placeholder="Player 6"></input></div>
+			<div class="row"><input class="inputName" placeholder="Player 1"></input></div>
+			<div class="row"><input class="inputName"placeholder="Player 2"></input></div>
+			<div class="row hidden"><input class="inputName" placeholder="Player 3"></input></div>
+			<div class="row hidden"><input class="inputName" placeholder="Player 4"></input></div>
+			<div class="row hidden"><input class="inputName" placeholder="Player 5"></input></div>
+			<div class="row hidden"><input class="inputName" placeholder="Player 6"></input></div>
 		</div>
 
 		<div class="row"></div>
-			<!-- Column 1 -->
 			<div class="col">
 				<div class="row footer">
 					<button class="styled" id="startButton">Start</button>
@@ -58,17 +57,18 @@
 		</div>
 	</div>
 	<div class="container hidden" id="gameScreen">
-		<!-- Row 1 -->
 		<div class="row">
-			<!-- Column 1 -->
 			<div class="col">
 				<div class="row">
-					<span class="rooms-font xxl" id="timer"></span>
+					<span class="rooms-font xxl timer" id="mainTimer"></span>
+				</div>
+				<div class="row">
+					<span class="rooms-font" id="nextTurnLabel">➡️</span>
+					<span class="rooms-font timer sm" id="nextTurnTimer"></span>
 				</div>
 			</div>
 		</div>
 		<div class="row"></div>
-			<!-- Column 1 -->
 			<div class="col footer">
 				<div class="row">
 					<button class="styled" id="pauseButton">Pause⏸️</button>
