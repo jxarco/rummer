@@ -88,6 +88,7 @@ header {
 .footer {
     position: fixed;
     bottom: 24px;
+	width: 100%;
 }
 
 .container {
@@ -264,4 +265,12 @@ button:active {
 
 #settings * {
 	width: 32px;
+}
+
+#alert {
+	padding: 40px 12px;
+	margin: 0 auto;
+	background-color: #53B3CB;
+	color: var(--palette-color-secondary);
+	font-size: 1.6em;
 }

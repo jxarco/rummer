@@ -37,6 +37,7 @@ var app = {
         this.titleElement = document.querySelector( "#title" );
         this.titleElement.innerText = DEFAULT_TITLE;
 
+        this.alertElement = document.querySelector( "#alert" );
         this.preGameScreen = document.querySelector( "#preGameScreen" );
         this.gameScreen = document.querySelector( "#gameScreen" );
         this.postGameScreen = document.querySelector( "#postGameScreen" );
@@ -167,39 +168,43 @@ var app = {
         // Check repetitions
         const inputs = this.playerInputsElement.querySelectorAll( ".inputName" );
         const names = Array.from( inputs ).map( i => i.value );
+        const repeatAlerts = {};
 
-        let error = false;
+        let error = "";
 
         for( let i = 0; i < this.playerCount; ++i )
         {
             const playerName = names[ i ];
             if( playerName == "" )
             {
-                console.log(`Player ${ i + 1 } name is empty!`);
+                error += `\nPlayer [${ i + 1 }] name is empty!`;
                 inputs[ i ].classList.add( "error" );
-                error = true;
                 continue;
             }
 
             if( playerName.length < 3 )
             {
-                console.log(`Player ${ i + 1 } name [${ playerName }] is too short. Use 3 or more characters!`);
+                error += `\n[${ playerName }] is too short. Use > 2 characters!`;
                 inputs[ i ].classList.add( "error" );
-                error = true;
                 continue;
             }
 
             const repeats = names.reduce( (acc, value) => { if( value == playerName ) return acc + 1; else return acc }, 0 );
-            if( repeats > 1 )
+            if( repeats > 1 && !repeatAlerts[ playerName ] )
             {
-                console.log(`Player name ${ playerName } is being used ${ repeats } times!`);
+                error += `\n[${ playerName }] is being used ${ repeats } times!`;
                 inputs[ i ].classList.add( "error" );
-                error = true;
+                repeatAlerts[ playerName ] = repeats;
             }
         }
 
-        if( error )
+        if( error.length )
         {
+            error = error.substring( 1 );
+            console.error( error );
+            this.alertElement.innerText = error;
+            this.show( this.alertElement );
+            setTimeout( () => { this.hide( this.alertElement ) }, 3000 );
             return;
         }
 
