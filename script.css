@@ -218,6 +218,7 @@ button {
 
 #mainTimer {
 	box-shadow: 0px 0px 12px 0px  var(--palette-color-primary);
+	color: var(--palette-color-highlight-primary);
 }
 
 .timer.sm {
@@ -234,7 +235,8 @@ button {
 	align-self: center;
 	font-size: 2em;
 	font-family: "Staatliches", sans-serif;
-	letter-spacing: 0.08em;
+	font-weight: 700;
+	letter-spacing: 0.04em;
 }
 
 .timer:active {
