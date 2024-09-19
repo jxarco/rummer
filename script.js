@@ -98,6 +98,38 @@ var app = {
         this.timerElement.addEventListener( 'mousedown', e => {
             this.nextTurn();
         });
+
+        if( localStorage.getItem( "playerNames" ) )
+        {
+            this.playerCount = 0;
+
+            const names = JSON.parse( localStorage["playerNames"] );
+
+            for( let i = 0; i < names.length; ++i )
+            {
+                const name = names[ i ];
+                const element = this.playerInputsElement.children[ i ];
+
+                if( name == "" )
+                {
+                    element.classList.add( "hidden" );
+                }
+                else
+                {
+                    element.classList.remove( "hidden" );
+                    element.querySelector( "input" ).value = name;
+                    this.playerCount++;
+                }
+            }
+
+            this.playerCountElement.innerText = this.playerCount;
+        }
+
+        if( localStorage.getItem( "playerTime" ) )
+        {
+            this.playerTime = +localStorage["playerTime"];
+            this.playerTimeElement.innerText = this.playerTime + " min";
+        }
     },
 
     updatePlayers: function() {
@@ -124,7 +156,8 @@ var app = {
     startGame: function() {
 
         // Check repetitions
-        const names = Array.from(this.playerInputsElement.querySelectorAll( ".inputName" )).map( i => i.value )
+        const names = Array.from(this.playerInputsElement.querySelectorAll( ".inputName" )).map( i => i.value );
+
         for( let i = 0; i < this.playerCount; ++i )
         {
             const playerName = names[ i ];
@@ -168,6 +201,10 @@ var app = {
         this.setPlayerTurn( 0 );
 
         console.log("Game started...");
+
+        // Cache names for next game
+        localStorage[ "playerNames" ] = JSON.stringify( names );
+        localStorage[ "playerTime" ] = this.playerTime;
 
         // Start loop
         requestAnimationFrame( this.loop.bind( this ) );
